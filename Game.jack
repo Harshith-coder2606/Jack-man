@@ -1,0 +1,118 @@
+class Game {
+  // current score
+  field Score score;
+  // the pacman instance
+  field PacMan pacman;
+  // grid of pellets
+  field Pellets pellets;
+  // collection of walls
+  field Walls walls;
+  // collection of ghosts
+  field Ghosts ghosts;
+  // labels on the side excluding score, highscore
+  field Labels labels;
+  // leaderboard array
+  field Array leaderboard;
+
+  // create a new game
+  constructor Game new() {
+    let leaderboard = null; // first time: no leaderboard
+    do createSprites();
+    return this;
+  }
+
+  // call initialization functions
+  method void init() {
+    do pacman.init();
+    do walls.init();
+    do pellets.init();
+    do score.init();
+    do ghosts.init();
+    do labels.init();
+    return;
+  }
+
+  // repeated game logic
+  method void next() {
+    var int key;
+
+    // if the game is over, restart when F2 is pressed
+    if (pacman.getIsCaptured()) {
+      do Output.moveCursor(15, 46);
+      do Output.printString("GAME OVER");
+      do Output.moveCursor(17, 46);
+      do Output.printString("TO RESTART");
+      do Output.moveCursor(18, 46);
+      do Output.printString("- PRESS F2");
+      
+      // update leaderboard only ONCE
+      do score.updateLeaderboard();
+      
+      while (true) {
+        let key = Keyboard.keyPressed();
+        if (key = 142) {
+          do newGame();
+          return;
+        }
+      }
+    }
+
+    // refresh state of game objects
+    do pacman.next();
+    do ghosts.next();
+    do score.next();
+    return;
+  }
+
+  method void handleKey(int key) {
+    if (key = 142) {
+      do newGame();
+      return;
+    }
+    do pacman.handleKey(key);
+    return;
+  }
+
+  method void newGame() {
+    // backup leaderboard before restarting
+    let leaderboard = score.getHighscores();
+    // destroy current game
+    do disposeSprites();
+    // clear screen
+    do Screen.clearScreen();
+    // recreate new game
+    do createSprites();
+    // call initialization functions
+    do init();
+    return;
+  }
+
+  // create all sprites
+  method void createSprites() {
+    let walls = Walls.new();
+    let pellets = Pellets.new();
+    let pacman = PacMan.new(pellets, walls);
+    let score = Score.new(pellets, pacman, leaderboard);
+    let ghosts = Ghosts.new(pacman, walls, pellets);
+    let labels = Labels.new();
+    return;
+  }
+
+  // destroy all sprites
+  method void disposeSprites() {
+    do walls.dispose();
+    do pellets.dispose();
+    do pacman.dispose();
+    do score.dispose();
+    do ghosts.dispose();
+    do labels.dispose();
+    return;
+  }
+
+  // dispose all
+  method void dispose() {
+    do disposeSprites();
+    do Memory.deAlloc(this);
+    return;
+  }
+}

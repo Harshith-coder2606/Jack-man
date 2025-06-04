@@ -1,0 +1,97 @@
+class Score {
+  // current score
+  field int score;
+  field int high;
+  field Array highscores; // Array of highscores
+  field Pellets pellets;
+  field PacMan pacman;
+
+  constructor Score new(Pellets p, PacMan pm, Array oldScores) {
+    let score = 0;
+    let high = 0;
+    let pellets = p;
+    let pacman = pm;
+
+    // initialize highscores array
+    if (oldScores = null) {
+      let highscores = Array.new(5); // 5 scores
+      let highscores[0] = 0;
+      let highscores[1] = 0;
+      let highscores[2] = 0;
+      let highscores[3] = 0;
+      let highscores[4] = 0;
+    } else {
+      let highscores = oldScores; // keep existing highscores
+    }
+    return this;
+  }
+
+  method void init() {
+    do draw();
+    return;
+  }
+
+  method void next() {
+    var int nextScore;
+    let nextScore = pellets.getCapturedCount() * 10;
+    if (~(nextScore = score)) {
+      let score = nextScore;
+      if (score > high) {
+        let high = score;
+      }
+      do draw();
+    }
+    return;
+  }
+
+  method void updateLeaderboard() {
+    var int i, j;
+    var int temp;
+    // try inserting current score into highscores
+    let temp = score;
+    let i = 0;
+
+    while (i < 5) {
+      if (temp > highscores[i]) {
+        // shift scores down
+        let j = 4;
+        while (j > i) {
+          let highscores[j] = highscores[j - 1];
+          let j = j - 1;
+        }
+        let highscores[i] = temp;
+        return;
+      }
+      let i = i + 1;
+    }
+    return;
+  }
+
+  method Array getHighscores() {
+    return highscores;
+  }
+
+  method void draw() {
+    var int i;
+    do Output.moveCursor(3, 46);
+    do Output.printString("SCORE:");
+    do Output.moveCursor(4, 46);
+    do Output.printInt(score);
+
+    do Output.moveCursor(6, 46);
+    do Output.printString("LEADERBOARD");
+
+    let i = 0;
+    while (i < 5) {
+      do Output.moveCursor(8 + i, 46);
+      do Output.printInt(highscores[i]);
+      let i = i + 1;
+    }
+    return;
+  }
+
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+}

@@ -1,0 +1,98 @@
+class Splash {
+  // show splash screen with improved visual design
+  function void show() {
+    // Draw border around the entire splash screen
+    do Screen.setColor(true);
+    do Screen.drawRectangle(10, 10, 500, 240);
+    do Screen.setColor(false);
+    do Screen.drawRectangle(12, 12, 498, 238);
+    do Screen.setColor(true);
+    
+    // Draw JACK-MAN title more centered (using existing code)
+    // You can keep your existing title drawing code here
+    // or replace with a more compact version
+    
+    // Draw a simple Pac-Man character using rectangles
+    do Splash.drawPacMan(80, 140);
+    
+    // Draw a ghost character
+    do Splash.drawGhost(400, 140);
+    
+    // Draw framed "TEAM 20" text
+    do Splash.drawTextBox(15, 28, "TEAM 20", 8);
+    
+    // Draw framed "PRESS ANY KEY TO START" text
+    do Splash.drawTextBox(18, 20, "PRESS ANY KEY TO START", 22);
+    
+    return;
+  }
+  
+  // Draw a simple Pac-Man character at x,y position
+  function void drawPacMan(int x, int y) {
+    // Main Pac-Man body (circle)
+    do Screen.setColor(true);
+    do Screen.drawCircle(x, y, 30);
+    
+    // "Mouth" (clear a triangle)
+    do Screen.setColor(false);
+    do Screen.drawLine(x, y, x + 30, y - 15);
+    do Screen.drawLine(x, y, x + 30, y + 15);
+    do Screen.drawLine(x + 30, y - 15, x + 30, y + 15);
+    
+    return;
+  }
+  
+  // Draw a simple ghost character at x,y position
+  function void drawGhost(int x, int y) {
+    // Ghost body
+    do Screen.setColor(true);
+    do Screen.drawRectangle(x - 20, y - 20, x + 20, y + 10);
+    
+    // Round top
+    do Screen.drawCircle(x, y - 20, 20);
+    
+    // Wavy bottom
+    do Screen.setColor(false);
+    do Screen.drawRectangle(x - 20, y + 5, x - 12, y + 15);
+    do Screen.drawRectangle(x - 4, y + 5, x + 4, y + 15);
+    do Screen.drawRectangle(x + 12, y + 5, x + 20, y + 15);
+    
+    // Eyes
+    do Screen.setColor(false);
+    do Screen.drawCircle(x - 8, y - 15, 5);
+    do Screen.drawCircle(x + 8, y - 15, 5);
+    do Screen.setColor(true);
+    do Screen.drawCircle(x - 6, y - 13, 2);
+    do Screen.drawCircle(x + 10, y - 13, 2);
+    
+    return;
+  }
+  
+  // Draw text with a border box around it
+  function void drawTextBox(int row, int col, String text, int length) {
+    var int i, r1, r2, c1, c2;
+    
+    // Calculate box coordinates (8 pixels per character, 11 pixels per row)
+    let r1 = (row * 11) - 3;
+    let r2 = (row * 11) + 11;
+    let c1 = (col * 8) - 3;
+    let c2 = ((col + length) * 8) + 3;
+    
+    // Draw border
+    do Screen.drawRectangle(c1, r1, c2, r2);
+    do Screen.setColor(false);
+    do Screen.drawRectangle(c1 + 2, r1 + 2, c2 - 2, r2 - 2);
+    do Screen.setColor(true);
+    
+    // Print text
+    do Output.moveCursor(row, col);
+    do Output.printString(text);
+    
+    return;
+  }
+  
+  method void dispose() {
+    do Memory.deAlloc(this);
+    return;
+  }
+}

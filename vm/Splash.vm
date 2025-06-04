@@ -1,0 +1,342 @@
+function Splash.show 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 10
+push constant 10
+push constant 500
+push constant 240
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 12
+push constant 12
+push constant 498
+push constant 238
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 80
+push constant 140
+call Splash.drawPacMan 2
+pop temp 0
+push constant 400
+push constant 140
+call Splash.drawGhost 2
+pop temp 0
+push constant 15
+push constant 28
+push constant 7
+call String.new 1
+push constant 84
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 77
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 50
+call String.appendChar 2
+push constant 48
+call String.appendChar 2
+push constant 8
+call Splash.drawTextBox 4
+pop temp 0
+push constant 18
+push constant 20
+push constant 22
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 78
+call String.appendChar 2
+push constant 89
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 75
+call String.appendChar 2
+push constant 69
+call String.appendChar 2
+push constant 89
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 83
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 65
+call String.appendChar 2
+push constant 82
+call String.appendChar 2
+push constant 84
+call String.appendChar 2
+push constant 22
+call Splash.drawTextBox 4
+pop temp 0
+push constant 0
+return
+function Splash.drawPacMan 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push argument 1
+push constant 30
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push argument 1
+push argument 0
+push constant 30
+add
+push argument 1
+push constant 15
+sub
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push argument 1
+push argument 0
+push constant 30
+add
+push argument 1
+push constant 15
+add
+call Screen.drawLine 4
+pop temp 0
+push argument 0
+push constant 30
+add
+push argument 1
+push constant 15
+sub
+push argument 0
+push constant 30
+add
+push argument 1
+push constant 15
+add
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Splash.drawGhost 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push constant 20
+sub
+push argument 1
+push constant 20
+sub
+push argument 0
+push constant 20
+add
+push argument 1
+push constant 10
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 0
+push argument 1
+push constant 20
+sub
+push constant 20
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push constant 20
+sub
+push argument 1
+push constant 5
+add
+push argument 0
+push constant 12
+sub
+push argument 1
+push constant 15
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 0
+push constant 4
+sub
+push argument 1
+push constant 5
+add
+push argument 0
+push constant 4
+add
+push argument 1
+push constant 15
+add
+call Screen.drawRectangle 4
+pop temp 0
+push argument 0
+push constant 12
+add
+push argument 1
+push constant 5
+add
+push argument 0
+push constant 20
+add
+push argument 1
+push constant 15
+add
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push constant 8
+sub
+push argument 1
+push constant 15
+sub
+push constant 5
+call Screen.drawCircle 3
+pop temp 0
+push argument 0
+push constant 8
+add
+push argument 1
+push constant 15
+sub
+push constant 5
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push constant 6
+sub
+push argument 1
+push constant 13
+sub
+push constant 2
+call Screen.drawCircle 3
+pop temp 0
+push argument 0
+push constant 10
+add
+push argument 1
+push constant 13
+sub
+push constant 2
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Splash.drawTextBox 5
+push argument 0
+push constant 11
+call Math.multiply 2
+push constant 3
+sub
+pop local 1
+push argument 0
+push constant 11
+call Math.multiply 2
+push constant 11
+add
+pop local 2
+push argument 1
+push constant 8
+call Math.multiply 2
+push constant 3
+sub
+pop local 3
+push argument 1
+push argument 3
+add
+push constant 8
+call Math.multiply 2
+push constant 3
+add
+pop local 4
+push local 3
+push local 1
+push local 4
+push local 2
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push local 3
+push constant 2
+add
+push local 1
+push constant 2
+add
+push local 4
+push constant 2
+sub
+push local 2
+push constant 2
+sub
+call Screen.drawRectangle 4
+pop temp 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push argument 0
+push argument 1
+call Output.moveCursor 2
+pop temp 0
+push argument 2
+call Output.printString 1
+pop temp 0
+push constant 0
+return
+function Splash.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
